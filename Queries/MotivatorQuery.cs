@@ -1,8 +1,11 @@
-﻿using MediatR;
+﻿using decision_dice.Models;
+using MediatR;
 
-namespace decision_dice.Motivators
+namespace decision_dice.Queries;
+
+public sealed class MotivatorQuery: IRequest<Motivator>
 {
-    public class MotivatorQueryHandler : IRequestHandler<MotivatorQuery, Motivator>
+    internal sealed class Handler : IRequestHandler<MotivatorQuery, Motivator>
     {
         public Task<Motivator> Handle(MotivatorQuery request, CancellationToken cancellationToken)
         {

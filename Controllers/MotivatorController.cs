@@ -1,4 +1,4 @@
-﻿using decision_dice.Motivators;
+﻿using decision_dice.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,5 +21,4 @@ public class MotivatorController : ControllerBase
         var motivator = await _mediator.Send(new MotivatorQuery());
         return Ok(motivator);
     }
-
 }
