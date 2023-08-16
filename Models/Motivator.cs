@@ -1,3 +1,3 @@
 ﻿namespace decision_dice.Models;
-public record Motivator(Guid motivatorId, string Title, string Description);
+public record Motivator(Guid MotivatorId, string Title, string Description, string Category, string UserName);
 
