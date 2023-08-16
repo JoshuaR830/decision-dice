@@ -16,8 +16,6 @@ public class CreateMotivatorCommand : IRequest
             var key = request._motivator.GenerateIdentifier();
             var content = request._motivator.Serialize();
 
-
-
             return Task.CompletedTask;
         }
     }

@@ -1,7 +1,4 @@
-﻿using decision_dice.Models;
-using MediatR;
-
-namespace decision_dice.Queries;
+﻿namespace decision_dice.Queries;
 
 public sealed class MotivatorQuery: IRequest<Motivator>
 {
@@ -9,7 +6,7 @@ public sealed class MotivatorQuery: IRequest<Motivator>
     {
         public Task<Motivator> Handle(MotivatorQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new Motivator(Guid.NewGuid(), "Title", "Description"));
+            return Task.FromResult(new Motivator(Guid.NewGuid(), "Title", "Description", "", ""));
         }
     }
 }
