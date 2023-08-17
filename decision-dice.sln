@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management", "src\Management\Management.csproj", "{C39A9B9D-85C0-4CB5-9C31-CE6F42872639}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotivatorManagementFunction", "src\MotivatorManagementFunction\MotivatorManagementFunction.csproj", "{69151AB7-1E8A-4C5E-BA61-64AC7B9170EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C39A9B9D-85C0-4CB5-9C31-CE6F42872639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C39A9B9D-85C0-4CB5-9C31-CE6F42872639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C39A9B9D-85C0-4CB5-9C31-CE6F42872639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69151AB7-1E8A-4C5E-BA61-64AC7B9170EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69151AB7-1E8A-4C5E-BA61-64AC7B9170EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69151AB7-1E8A-4C5E-BA61-64AC7B9170EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69151AB7-1E8A-4C5E-BA61-64AC7B9170EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

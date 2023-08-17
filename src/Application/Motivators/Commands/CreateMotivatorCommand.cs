@@ -19,5 +19,4 @@ public class CreateMotivatorCommand : IRequest
             return Task.CompletedTask;
         }
     }
-
 }
