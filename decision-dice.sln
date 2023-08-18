@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management", "src\Management\Management.csproj", "{C39A9B9D-85C0-4CB5-9C31-CE6F42872639}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotivatorManagementFunction", "src\MotivatorManagementFunction\MotivatorManagementFunction.csproj", "{69151AB7-1E8A-4C5E-BA61-64AC7B9170EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotivatorManagementFunction", "src\MotivatorManagementFunction\MotivatorManagementFunction.csproj", "{69151AB7-1E8A-4C5E-BA61-64AC7B9170EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25891E8F-9CFC-490C-BD7B-F639D18F35DF}"
+	ProjectSection(SolutionItems) = preProject
+		template.yaml = template.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
