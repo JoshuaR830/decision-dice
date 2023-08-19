@@ -2,12 +2,40 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@4.0.0
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
+  configure_role_arn:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup:
+      - run:
+          name: Create change set
+          command: |
+            CHANGESET_NAME=$CIRCLE_BRANCH-4CIRCLE_BUILD_NUM
+            STACK_NAME=decision-dice
+            DEPLOYMENT_BUCKET= #bucketName
+
+            aws cloudformation package --template-file template.yaml \
+              --s3-bucket $DEPLOYMENT_BUCKET
+              --s3-prefix $STACK_NAME/$CHANGESET_NAME
+              --output-template-file template-packaged.yaml
+
+            aws s3 cp template-packaged.yaml s3://$DEPLOYMENT_BUCKET/$STACK_NAME/$CHANGESET_NAME/
+
+            aws cloudformation create-change-set \
+              --template-url https://s3-eu-west-2.amazonaws.com/$DEPLOYMENT_BUCKET/$STACK_NAME/$CHANGESET_NAME/template-packaged.yaml \
+              --stack-name $STACK_NAME \
+              --change-set-name $CHANGESET_NAME \
+              --description "CircleCI $CIRCLE_BUILD_URL" \
+              --rollback-configuration "RollbackTriggers=[],MonitoringTimeInMinutes=0"
   build:
-    docker:
-      - image: cimg/aws:stable
+    machine:
+      image: ubuntu-2204:2023.02.1
     steps:
       - checkout
       - run:
@@ -16,8 +44,8 @@ jobs:
             "echo Hello, World"
             "echo Goodbye, Universe"
   deploy:
-    docker:
-      - image: cimg/base:stable
+    machine:
+      image: ubuntu-2204:2023.02.1
     steps:
       - checkout
       - run:
