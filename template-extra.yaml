@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+
+# https://docs.aws.amazon.com/lambda/latest/dg/urls-tutorial.html
+
+
+Resources:
+  MotivationManagementFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: MotivatorManagementFunction
+      Runtime: dotnet6
+      MemorySize: 256
+      Timeout: 30
+      Policies:
+        - 
+
+  MotivationManagementUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      AuthType: NONE
+      Cors:
+        AllowOrigins:
+          - https://*.joshuarichardson.dev
+      Qualifier:
+      TargetFunctionArn: !Ref MotivationManagementFunction.Arn

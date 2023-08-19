@@ -5,22 +5,63 @@ Transform: AWS::Serverless-2016-10-31
 
 
 Resources:
-	MotivationManagementFunction:
-		Type: AWS::Serverless::Function
-		Properties:
-			Handler: MotivatorManagementFunction
-			Runtime: dotnet6
-			MemorySize: 256
-			Timeout: 30
-			Policies:
-				- 
+  MotivationBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: decision-dice-motivators
 
-	MotivationManagementUrl:
-		Type: AWS::Lambda::Url
-		Properties:
-			AuthType: NONE
-			Cors:
-				AllowOrigins:
-					- https://*.joshuarichardson.dev
-			Qualifier:
-			TargetFunctionArn: !Ref MotivationManagementFunction.Arn
+  MotivationBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: decision-dice-motivators
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          Action: 
+            - s3:GetObject
+          Resource: "arn::aws::s3:::decision-dice-motivators/*"
+          Condition:
+            StringEquals:
+                AWS:SourceArn: !Sub "arn:aws:cloudfront::266804135388:distribution/${!Ref MotivationDistribution}"
+
+  MotivationOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl  
+    Properties:
+      OriginAccessControlConfig:
+        Name: MotivationOAC
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+      
+  MotivationDistribution:
+    Type: AWS::CloudFront::Distribution  
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          TargetOriginId: Motivators
+          ViewerProtocolPolicy: redirect-to-https
+          CachePolicyId: !Ref MotivationCachePolicy
+        Enabled: true
+        Origins:
+          - Id: Motivators
+            OriginPath: /motivators
+            DomainName: decision-dice-motivators.s3.eu-west-2.amazonaws.com
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+
+  MotivationCachePolicy:
+    Type: AWS::CloudFront::CachePolicy  
+    Properties:
+      CachePolicyConfig:
+        DefaultTTL: 86400
+        MaxTTL: 86400
+        MinTTL: 86400
+        Name: MotivationCachePolicy
+        ParametersInCacheKeyAndForwardedToOrigin:
+          CookiesConfig:
+            CookieBehavior: none
+          EnableAcceptEncodingGzip: true
+          HeadersConfig:
+            HeaderBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: none
