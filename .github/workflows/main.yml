@@ -1,0 +1,26 @@
+name: decision dice
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  cluster:
+    name: Deploy decision dice to AWS
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Configure AWS credentials
+      id: credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-2
+    - name: Deploy to AWS CloudFormation
+      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      with:
+        name: decision-dice
+        template: myStack.yaml
+#        parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
