@@ -27,7 +27,9 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: |
+        dotnet build --configuration Release --no-restore
+        dotnet publish -c Release /p:GenerateRuntimeConfigurationFiles=true
     - name: Package
       run: |
         aws cloudformation package --template-file template.yaml \
