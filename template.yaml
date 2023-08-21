@@ -18,15 +18,15 @@ Resources:
         Version: 2012-10-17
         Statement:
           Sid: AllowCloudFrontServicePrincipalReadOnly
+          Effect: Allow
           Principal:
             Service: cloudfront.amazonaws.com
-          Action: 
+          Action:
             - s3:GetObject
-          Effect: Allow
-          Resource: "arn::aws::s3:::decision-dice-motivators/*"
+          Resource: "arn:aws:s3:::decision-dice-motivators/*"
           Condition:
             StringEquals:
-                AWS:SourceArn: !Sub "arn:aws:cloudfront::266804135388:distribution/${!Ref MotivationDistribution}"
+              AWS:SourceArn: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${MotivationDistribution}"
 
   MotivationOriginAccessControl:
     Type: AWS::CloudFront::OriginAccessControl  
@@ -41,8 +41,6 @@ Resources:
     Type: AWS::CloudFront::Distribution  
     Properties:
       DistributionConfig:
-        Aliases:
-            - decisions.joshuarichardson.dev
         DefaultCacheBehavior:
           TargetOriginId: Motivators
           ViewerProtocolPolicy: allow-all
@@ -54,7 +52,9 @@ Resources:
             DomainName: decision-dice-motivators.s3.eu-west-2.amazonaws.com
             S3OriginConfig:
               OriginAccessIdentity: ""
+            OriginAccessControlId: !Ref MotivationOriginAccessControl
         ViewerCertificate:
+          OriginAccessControlId: !Ref MotivationOriginAccessControl
           AcmCertificateArn: arn:aws:acm:us-east-1:266804135388:certificate/126b7b2b-ea99-40af-98a2-03ab69944526
           MinimumProtocolVersion: TLSv1.2_2018
           SslSupportMethod: sni-only
@@ -75,3 +75,12 @@ Resources:
             HeaderBehavior: none
           QueryStringsConfig:
             QueryStringBehavior: none
+
+  #MotivationManagementFunction:
+  #  Type: AWS::Serverless::Function
+  #  Properties:
+  #    Handler: MotivatorManagementFunction
+  #    Runtime: dotnet6
+  #    CodeUri: publish/MotivatorManagementFunction
+  #    MemorySize: 256
+  #    Timeout: 30
