@@ -100,3 +100,11 @@ Resources:
             Action:
               - "sts:AssumeRole"
     
+  MotivationManagementUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      AuthType: NONE
+      Cors:
+        AllowOrigins:
+          - https://decisions.joshuarichardson.dev
+      TargetFunctionArn: !GetAtt MotivationManagementFunction.Arn
