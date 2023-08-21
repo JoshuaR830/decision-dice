@@ -41,7 +41,7 @@ Resources:
             - decisions.joshuarichardson.dev
         DefaultCacheBehavior:
           TargetOriginId: Motivators
-          ViewerProtocolPolicy: redirect-to-https
+          ViewerProtocolPolicy: allow-all
           CachePolicyId: !Ref MotivationCachePolicy
         Enabled: true
         Origins:
