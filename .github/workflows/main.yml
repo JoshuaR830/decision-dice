@@ -24,3 +24,11 @@ jobs:
         name: decision-dice
         template: template.yaml
 #        parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
+    - name: Package
+      run: |
+        aws cloudformation package --template-file template.yaml --s3-bucket code-for-lambda-functions --output-template-file templatePackaged.yaml --s3-prefix {{ github.ref_name }}-{{ github.run_number }}
+
+
+
+
+
