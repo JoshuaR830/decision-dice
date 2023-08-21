@@ -42,7 +42,9 @@ jobs:
         aws cloudformation create-change-set \
             --template-url https://s3-eu-west-2.amazonaws.com/joshuarichardson-deployment/${{ github.ref_name }}-${{ github.run_number }}/template-packaged.yaml \
             --stack-name decision-dice \
-            --change-set-name ${{ github.ref_name }}-${{ github.run_number }}
+            --change-set-name ${{ github.ref_name }}-${{ github.run_number }} \
+            --rollback-configuration "RollbackTriggers=[],MonitoringTimeInMinutes=0" \
+            --capabilities CAPABILITY_IAM
 
 
 
