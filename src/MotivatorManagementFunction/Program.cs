@@ -17,6 +17,8 @@ var handler = async (APIGatewayHttpApiV2ProxyRequest input, ILambdaContext conte
 {
     var motivator = JsonSerializer.Deserialize<Motivator>(input.Body);
 
+    LambdaLogger.Log($"New motivator for {motivator.UserName}, callled {motivator.Title}");
+
     return $"New motivator for {motivator.UserName}, callled {motivator.Title}";
 };
 
