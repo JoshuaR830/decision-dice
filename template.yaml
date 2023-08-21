@@ -85,3 +85,18 @@ Resources:
       CodeUri: publish/MotivatorManagementFunction
       MemorySize: 256
       Timeout: 30
+      ReservedConcurrentExecutions: 1
+      Role: !GetAtt MotivationManagementFunctionRole.Arn
+    
+  MotivationManagementFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+    
