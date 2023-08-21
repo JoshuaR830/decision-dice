@@ -24,6 +24,10 @@ jobs:
     #    name: decision-dice
     #    template: template.yaml
 #        parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
     - name: Package
       run: |
         aws cloudformation package --template-file template.yaml \
