@@ -18,15 +18,23 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
-    - name: Deploy to AWS CloudFormation
-      uses: aws-actions/aws-cloudformation-github-deploy@v1
-      with:
-        name: decision-dice
-        template: template.yaml
+    #- name: Deploy to AWS CloudFormation
+    #  uses: aws-actions/aws-cloudformation-github-deploy@v1
+    #  with:
+    #    name: decision-dice
+    #    template: template.yaml
 #        parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
     - name: Package
       run: |
-        aws cloudformation package --template-file template.yaml --s3-bucket code-for-lambda-functions --output-template-file templatePackaged.yaml --s3-prefix {{ github.ref_name }}-{{ github.run_number }}
+        aws cloudformation package --template-file template.yaml \
+            --s3-bucket code-for-lambda-functions \
+            --output-template-file templatePackaged.yaml \
+            --s3-prefix {{ github.ref_name }}-{{ github.run_number }}
+
+        aws cloudformation create-change-set \
+            --template-url https://s3-eu-west-2.amazonaws.com/code-for-lambda-functions/{{ github.ref_name }}-{{ github.run_number }}/templatePackaged.yaml
+            --stack-name decision-dice
+            --changeset-name {{ github.ref_name }}-{{ github.run_number }}
 
 
 
