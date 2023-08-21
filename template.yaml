@@ -99,7 +99,14 @@ Resources:
               Service: lambda.amazonaws.com
             Action:
               - "sts:AssumeRole"
-    
+          - Effect: Allow
+            Principal: "*"
+            Action: "lambda:InvokeFunctionUrl"
+            Resource: "arn:aws:lambda:eu-west-2:266804135388:function:*"
+            Condition:
+              StringEquals:
+                "lambda:FunctionUrlAuthType": "NONE"
+
   MotivationManagementUrl:
     Type: AWS::Lambda::Url
     Properties:
@@ -107,4 +114,5 @@ Resources:
       Cors:
         AllowOrigins:
           - https://decisions.joshuarichardson.dev
+          - http://decisions.joshuarichardson.dev 
       TargetFunctionArn: !GetAtt MotivationManagementFunction.Arn
