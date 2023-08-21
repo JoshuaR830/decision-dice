@@ -77,11 +77,11 @@ Resources:
           QueryStringsConfig:
             QueryStringBehavior: none
 
-  #MotivationManagementFunction:
-  #  Type: AWS::Serverless::Function
-  #  Properties:
-  #    Handler: MotivatorManagementFunction
-  #    Runtime: dotnet6
-  #    CodeUri: publish/MotivatorManagementFunction
-  #    MemorySize: 256
-  #    Timeout: 30
+  MotivationManagementFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: MotivatorManagementFunction
+      Runtime: dotnet6
+      CodeUri: publish/MotivatorManagementFunction
+      MemorySize: 256
+      Timeout: 30
