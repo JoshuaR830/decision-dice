@@ -17,12 +17,16 @@ Resources:
       PolicyDocument:
         Version: 2012-10-17
         Statement:
+          Sid: AllowCloudFrontServicePrincipalReadOnly
+          Effect: Allow
+          Principal:
+            Service: cloudfront.amazonaws.com
           Action: 
             - s3:GetObject
-          Resource: "arn::aws::s3:::decision-dice-motivators/*"
+          Resource: "arn:aws:s3:::decision-dice-motivators/*"
           Condition:
             StringEquals:
-                AWS:SourceArn: !Sub "arn:aws:cloudfront::266804135388:distribution/${!Ref MotivationDistribution}"
+              AWS:SourceArn: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${MotivationDistribution}"
 
   MotivationOriginAccessControl:
     Type: AWS::CloudFront::OriginAccessControl  
@@ -48,6 +52,7 @@ Resources:
             DomainName: decision-dice-motivators.s3.eu-west-2.amazonaws.com
             S3OriginConfig:
               OriginAccessIdentity: ""
+            OriginAccessControlId: !Ref MotivationOriginAccessControl
 
   MotivationCachePolicy:
     Type: AWS::CloudFront::CachePolicy  
