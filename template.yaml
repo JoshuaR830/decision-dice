@@ -51,7 +51,7 @@ Resources:
             S3OriginConfig:
               OriginAccessIdentity: ""
         ViewerCertificate:
-          IamCertificateId: 126b7b2b-ea99-40af-98a2-03ab69944526
+          AcmCertificateArn: arn:aws:acm:us-east-1:266804135388:certificate/126b7b2b-ea99-40af-98a2-03ab69944526
           MinimumProtocolVersion: TLSv1.2_2018
           SslSupportMethod: sni-only
 
