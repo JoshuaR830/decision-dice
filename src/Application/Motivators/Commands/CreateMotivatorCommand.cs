@@ -6,10 +6,8 @@ public class CreateMotivatorCommand : IRequest
 {
     protected Motivator _motivator;
 
-    public CreateMotivatorCommand(Motivator motivator)
-    {
+    public CreateMotivatorCommand(Motivator motivator) =>
         _motivator = motivator;
-    }
 
     internal sealed class Handler : IRequestHandler<CreateMotivatorCommand>
     {

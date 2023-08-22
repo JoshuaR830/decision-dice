@@ -10,11 +10,8 @@ var app = builder.ConfigureLambdaApplication();
 app.MapPost("/", async ([FromBody]Motivator motivator, IMediator mediator) =>
 {
     if (motivator == null)
-    {
-        Console.WriteLine("Failed to serialize body");
         return "No motivator could be retrieved";
-    }
-
+ 
     await mediator.Send(new CreateMotivatorCommand(motivator));
 
     return $"New motivator for {motivator.UserName}, called {motivator.Title}";
