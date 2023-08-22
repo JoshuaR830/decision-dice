@@ -1,4 +1,6 @@
-﻿namespace decision_dice.Commands;
+﻿using decision_dice.Models;
+
+namespace decision_dice.Commands;
 
 public class CreateMotivatorCommand : IRequest
 {
@@ -15,6 +17,8 @@ public class CreateMotivatorCommand : IRequest
         {
             var key = request._motivator.GenerateIdentifier();
             var content = request._motivator.Serialize();
+
+            Console.WriteLine($"New motivator for {key}, called {content}");
 
             return Task.CompletedTask;
         }
