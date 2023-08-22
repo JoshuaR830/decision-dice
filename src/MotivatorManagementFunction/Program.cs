@@ -17,9 +17,15 @@ var handler = async (APIGatewayHttpApiV2ProxyRequest input, ILambdaContext conte
 {
     var motivator = JsonSerializer.Deserialize<Motivator>(input.Body);
 
-    LambdaLogger.Log($"New motivator for {motivator.UserName}, callled {motivator.Title}");
+    if (motivator == null)
+    {
+        Console.WriteLine("Failed to serialize body");
+        return "No motivator could be retrieved";
+    }
 
-    return $"New motivator for {motivator.UserName}, callled {motivator.Title}";
+    Console.WriteLine($"New motivator for {motivator.UserName}, called {motivator.Title}");
+
+    return $"New motivator for {motivator.UserName}, called {motivator.Title}";
 };
 
 await LambdaBootstrapBuilder.Create(handler, new DefaultLambdaJsonSerializer())
