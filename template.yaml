@@ -99,17 +99,14 @@ Resources:
               Service: lambda.amazonaws.com
             Action:
               - "sts:AssumeRole"
-      Policies:
-        - PolicyName: UrlLambdaInvocation
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action: lambda:InvokeFunctionUrl
-                Resource: !Sub "arn:aws:lambda:eu-west-2:${AWS::AccountId}:function:*"
-                Condition:
-                  StringEquals:
-                    lambda:FunctionUrlAuthType: NONE
+
+  UrlLambdaInvocationPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunctionUrl
+      FunctionName: !Ref MotivationManagementFunction
+      FunctionUrlAuthType: NONE
+      Principal: "*"
 
   MotivationManagementUrl:
     Type: AWS::Lambda::Url
