@@ -5,14 +5,14 @@ public static class StartupExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddMediatR(c => c.RegisterServicesFromAssembly(typeof(Program).Assembly));
-        services.AddControllers();
+        //services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
         return services;
     }
-    
-    public static void ConfigureApplication(this WebApplicationBuilder builder)
+
+    private static WebApplication SharedSetup(WebApplicationBuilder builder)
     {
         var app = builder.Build();
 
@@ -23,6 +23,13 @@ public static class StartupExtensions
             app.UseSwaggerUI();
         }
 
+        return app;
+    }
+    
+    public static void ConfigureApplication(this WebApplicationBuilder builder)
+    {
+        var app = SharedSetup(builder);
+
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
@@ -30,6 +37,11 @@ public static class StartupExtensions
         app.MapControllers();
 
         app.Run();
+    }
+
+    public static WebApplication ConfigureLambdaApplication(this WebApplicationBuilder builder)
+    {
+        return SharedSetup(builder);
     }
 }
     
