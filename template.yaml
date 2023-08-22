@@ -99,6 +99,18 @@ Resources:
               Service: lambda.amazonaws.com
             Action:
               - "sts:AssumeRole"
+      Policies:
+        - PolicyName: LambdaLogging
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Sid: LambdaLogging
+                Effect: Allow
+                Action:
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                  - "logs:CreateLogGroup"
+                Resource: "*"
 
   UrlLambdaInvocationPermission:
     Type: AWS::Lambda::Permission
