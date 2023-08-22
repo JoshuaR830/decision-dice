@@ -8,15 +8,16 @@
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using decision_dice.Models;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 var app = builder.ConfigureLambdaApplication();
 
-app.MapGet("/", (APIGatewayHttpApiV2ProxyRequest input, ILambdaContext context) =>
+app.MapPost("/", ([FromBody]Motivator motivator, ILambdaContext context) =>
 {
-    var motivator = JsonSerializer.Deserialize<Motivator>(input.Body);
+    //var motivator = JsonSerializer.Deserialize<Motivator>(input.Body);
 
     if (motivator == null)
     {
