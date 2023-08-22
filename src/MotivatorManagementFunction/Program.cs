@@ -5,14 +5,28 @@
 //using Amazon.S3;
 //using decision_dice.Models;
 
+using Amazon.Lambda.APIGatewayEvents;
+using Amazon.Lambda.Core;
+using decision_dice.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 var app = builder.ConfigureLambdaApplication();
 
-app.MapGet("/", () =>
+app.MapGet("/", (APIGatewayHttpApiV2ProxyRequest input, ILambdaContext context) =>
 {
-    return $"Minimal APIs";
+    var motivator = JsonSerializer.Deserialize<Motivator>(input.Body);
+
+    if (motivator == null)
+    {
+        Console.WriteLine("Failed to serialize body");
+        return "No motivator could be retrieved";
+    }
+
+    Console.WriteLine($"New motivator for {motivator.UserName}, called {motivator.Title}");
+
+    return $"New motivator for {motivator.UserName}, called {motivator.Title}";
 });
 
 app.Run();
