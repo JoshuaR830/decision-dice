@@ -15,7 +15,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 var app = builder.ConfigureLambdaApplication();
 
-app.MapPost("/", ([FromBody]Motivator motivator, ILambdaContext context) =>
+app.MapPost("/", ([FromBody]Motivator motivator) =>
 {
     //var motivator = JsonSerializer.Deserialize<Motivator>(input.Body);
 
