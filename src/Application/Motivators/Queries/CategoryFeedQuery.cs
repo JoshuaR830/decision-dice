@@ -17,23 +17,24 @@ public sealed class CategoryFeedQuery: IRequest<CategoryFeed>
 
         public async Task<CategoryFeed> Handle(CategoryFeedQuery request, CancellationToken cancellationToken)
         {
-            var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
-            {
-                BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = $"feeds/category/{request._userName}",
-            });
-
-            if (feed.HttpStatusCode != System.Net.HttpStatusCode.OK)
-                return null;
-
-            using var stream = feed.ResponseStream;
-            using var reader = new StreamReader(stream);
-            var response = await reader.ReadToEndAsync();
-
             CategoryFeed responseObject;
 
             try
             {
+                var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
+                {
+                    BucketName = IdentifierExtensions.BUCKET_NAME,
+                    Key = $"feeds/category/{request._userName}",
+                });
+
+                if (feed.HttpStatusCode != System.Net.HttpStatusCode.OK)
+                    return new CategoryFeed(Enumerable.Empty<Category>(), request._userName);
+
+                using var stream = feed.ResponseStream;
+                using var reader = new StreamReader(stream);
+                var response = await reader.ReadToEndAsync();
+
+            
                 responseObject = response.Deserialize<CategoryFeed>();
             }
             catch (Exception)

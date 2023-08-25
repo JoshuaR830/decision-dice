@@ -19,20 +19,20 @@ public sealed class MotivatorFeedQuery: IRequest<MotivatorFeed>
 
         public async Task<MotivatorFeed> Handle(MotivatorFeedQuery request, CancellationToken cancellationToken)
         {
-            var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
-            {
-                BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = $"feeds/motivators/{request._userName}/{request._categoryName}",
-            });
-
-            using var stream = feed.ResponseStream;
-            using var reader = new StreamReader(stream);
-            var response = await reader.ReadToEndAsync();
-
             MotivatorFeed responseObject;
 
             try
             {
+                var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
+                {
+                    BucketName = IdentifierExtensions.BUCKET_NAME,
+                    Key = $"feeds/motivators/{request._userName}/{request._categoryName}",
+                });
+
+                using var stream = feed.ResponseStream;
+                using var reader = new StreamReader(stream);
+                var response = await reader.ReadToEndAsync();
+
                 responseObject = response.Deserialize<MotivatorFeed>();
             }
             catch (Exception)
