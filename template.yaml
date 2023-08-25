@@ -50,7 +50,6 @@ Resources:
         Enabled: true
         Origins:
           - Id: Motivators
-            OriginPath: /motivators
             DomainName: decision-dice-motivators.s3.eu-west-2.amazonaws.com
             S3OriginConfig:
               OriginAccessIdentity: ""
