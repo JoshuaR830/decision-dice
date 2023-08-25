@@ -1,4 +1,4 @@
-﻿namespace decision_dice.Queries;
+﻿namespace Application.Queries;
 
 public sealed class MotivatorQuery: IRequest<Motivator>
 {

@@ -1,4 +1,4 @@
-﻿namespace decision_dice.ExtensionMethods
+﻿namespace Application.ExtensionMethods
 {
     public static class SerializerExtensions
     {

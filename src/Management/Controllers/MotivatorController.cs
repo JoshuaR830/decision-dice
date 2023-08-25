@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Motivators.Commands;
+using Application.Motivators.Models;
+using Application.Queries;
+using Microsoft.AspNetCore.Mvc;
 
-namespace decision_dice.Controllers;
+namespace Application.Controllers;
 
 [ApiController]
 [Route("[controller]")]

@@ -1,8 +1,4 @@
-﻿using decision_dice.Models;
-using Amazon.S3;
-using Amazon.S3.Model;
-
-namespace decision_dice.Commands;
+﻿namespace Application.Motivators.Commands;
 
 public class CreateMotivatorCommand : IRequest
 {
@@ -26,8 +22,8 @@ public class CreateMotivatorCommand : IRequest
 
             await _s3Client.PutObjectAsync(new PutObjectRequest
             {
-                BucketName = "decision-dice-motivators",
-                Key = $"motivators/{key}",
+                BucketName = IdentifierExtensions.BUCKET_NAME,
+                Key = key,
                 ContentType = "application/json",
                 ContentBody = content
             }, cancellationToken);

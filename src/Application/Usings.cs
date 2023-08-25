@@ -1,4 +1,6 @@
 ﻿global using MediatR;
-global using decision_dice.Models;
-global using decision_dice.ExtensionMethods;
 global using System.Text.Json;
+global using Amazon.S3;
+global using Amazon.S3.Model;
+global using Application.Motivators.Models;
+global using Application.ExtensionMethods;
