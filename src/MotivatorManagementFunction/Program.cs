@@ -29,4 +29,16 @@ app.MapPost("/category", async ([FromBody] Category category, IMediator mediator
     return $"New category for {category.UserName}, called {category.CategoryName}";
 });
 
+app.MapGet("/category-feed/{userName}", async (string userName, IMediator mediator) =>
+{
+    var feed = await mediator.Send(new CategoryFeedQuery(userName));
+    return feed;
+});
+
+app.MapGet("/motivator-feed/{userName}/{categoryName}", async (string userName, string category, IMediator mediator) =>
+{
+    var feed = await mediator.Send(new MotivatorFeedQuery(category, userName));
+    return feed;
+});
+
 app.Run();

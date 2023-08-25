@@ -27,7 +27,6 @@ public class CreateCategoryCommand : IRequest
                 Key = key,
                 ContentType = "application/json",
                 ContentBody = content,
-
             });
         }
     }

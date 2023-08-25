@@ -7,5 +7,12 @@
             var options = new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
             return JsonSerializer.Serialize(model, options);
         }
+
+        public static T Deserialize<T>(this string jsonString)
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+
+            return JsonSerializer.Deserialize<T>(jsonString, options);
+        }
     }
 }
