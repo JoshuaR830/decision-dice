@@ -1,2 +1,2 @@
 ﻿namespace Application.Motivators.Models;
-public record MotivatorFeed(List<Motivator> motivatorList, string Category, string UserName);
+public record MotivatorFeed(IEnumerable<Motivator> MotivatorList, string Category, string UserName);

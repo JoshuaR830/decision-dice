@@ -28,7 +28,19 @@ public sealed class MotivatorFeedQuery: IRequest<MotivatorFeed>
             using var stream = feed.ResponseStream;
             using var reader = new StreamReader(stream);
             var response = await reader.ReadToEndAsync();
-            return response.Deserialize<MotivatorFeed>();
+
+            MotivatorFeed responseObject;
+
+            try
+            {
+                responseObject = response.Deserialize<MotivatorFeed>();
+            }
+            catch (Exception)
+            {
+                responseObject = new MotivatorFeed(Enumerable.Empty<Motivator>(), request._categoryName, request._userName);
+            }
+
+            return responseObject;
         }
     }
 }

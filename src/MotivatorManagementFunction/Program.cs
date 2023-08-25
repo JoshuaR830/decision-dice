@@ -15,6 +15,7 @@ app.MapPost("/motivator", async ([FromBody]Motivator motivator, IMediator mediat
         return "No motivator could be retrieved";
  
     await mediator.Send(new CreateMotivatorCommand(motivator));
+    await mediator.Send(new MotivatorFeedCommand(motivator));
 
     return $"New motivator for {motivator.UserName}, called {motivator.Title}";
 });
@@ -25,6 +26,7 @@ app.MapPost("/category", async ([FromBody] Category category, IMediator mediator
         return "No category could be retrieved";
 
     await mediator.Send(new CreateCategoryCommand(category));
+    await mediator.Send(new CategoryFeedCommand(category));
 
     return $"New category for {category.UserName}, called {category.CategoryName}";
 });
