@@ -28,7 +28,7 @@ public class MotivatorFeedCommand : IRequest
             await _s3Client.PutObjectAsync(new PutObjectRequest
             {
                 BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = $"feeds/motivator/{request._motivator.UserName}/{request._motivator.Category}",
+                Key = $"feeds/motivator/{request._motivator.UserName}/{request._motivator.Category}".ReplaceSpacesWithDashes(),
                 ContentType = "application/json",
                 ContentBody = motivatorFeed.Serialize()
             });

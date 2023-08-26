@@ -24,7 +24,7 @@ public sealed class CategoryFeedQuery: IRequest<CategoryFeed>
                 var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
                 {
                     BucketName = IdentifierExtensions.BUCKET_NAME,
-                    Key = $"feeds/category/{request._userName}",
+                    Key = $"feeds/category/{request._userName}".ReplaceSpacesWithDashes(),
                 });
 
                 if (feed.HttpStatusCode != System.Net.HttpStatusCode.OK)

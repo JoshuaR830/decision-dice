@@ -28,7 +28,7 @@ public class CategoryFeedCommand : IRequest
             await _s3Client.PutObjectAsync(new PutObjectRequest
             {
                 BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = $"feeds/category/{request._category.UserName}",
+                Key = $"feeds/category/{request._category.UserName}".ReplaceSpacesWithDashes(),
                 ContentType = "application/json",
                 ContentBody = existingFeed.Serialize()
             });
