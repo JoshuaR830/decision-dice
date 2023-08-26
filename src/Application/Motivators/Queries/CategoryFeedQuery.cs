@@ -28,7 +28,7 @@ public sealed class CategoryFeedQuery: IRequest<CategoryFeed>
                 });
 
                 if (feed.HttpStatusCode != System.Net.HttpStatusCode.OK)
-                    return new CategoryFeed(new List<Category>(), request._userName);
+                    return new CategoryFeed(new List<string>(), request._userName);
 
                 using var stream = feed.ResponseStream;
                 using var reader = new StreamReader(stream);
@@ -39,7 +39,7 @@ public sealed class CategoryFeedQuery: IRequest<CategoryFeed>
             }
             catch (Exception)
             {
-                responseObject = new CategoryFeed(new List<Category>(), request._userName);
+                responseObject = new CategoryFeed(new List<string>(), request._userName);
             }
 
             return responseObject;

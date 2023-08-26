@@ -21,7 +21,9 @@ public class CategoryFeedCommand : IRequest
         public async Task Handle(CategoryFeedCommand request, CancellationToken cancellationToken)
         {
             var existingFeed = await _mediator.Send(new CategoryFeedQuery(request._category.UserName));
-            existingFeed.Categories.Add(request._category);
+
+            if (!existingFeed.Categories.Any(name => name == request._category.CategoryName))
+                existingFeed.Categories.Add(request._category.CategoryName);
 
             Console.WriteLine(request._category);
             Console.WriteLine(existingFeed.Serialize());
