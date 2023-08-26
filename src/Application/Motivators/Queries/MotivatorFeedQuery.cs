@@ -26,7 +26,7 @@ public sealed class MotivatorFeedQuery: IRequest<MotivatorFeed>
                 var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
                 {
                     BucketName = IdentifierExtensions.BUCKET_NAME,
-                    Key = $"feeds/motivators/{request._userName}/{request._categoryName}",
+                    Key = $"feeds/motivator/{request._userName}/{request._categoryName}",
                 });
 
                 Console.WriteLine("S3 request made");

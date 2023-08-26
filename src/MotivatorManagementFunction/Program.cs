@@ -37,9 +37,9 @@ app.MapGet("/category-feed/{userName}", async (string userName, IMediator mediat
     return feed;
 });
 
-app.MapGet("/motivator-feed/{userName}/{categoryName}", async (string userName, string category, IMediator mediator) =>
+app.MapGet("/motivator-feed/{userName}/{categoryName}", async (string userName, string categoryName, IMediator mediator) =>
 {
-    var feed = await mediator.Send(new MotivatorFeedQuery(category, userName));
+    var feed = await mediator.Send(new MotivatorFeedQuery(categoryName, userName));
     return feed;
 });
 
