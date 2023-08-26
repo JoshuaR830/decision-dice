@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Amazon.S3;
 using Amazon.Extensions.NETCore.Setup;
+using Amazon.CloudFront;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddDefaultAWSOptions(new AWSOptions());
 builder.Services.AddAWSService<IAmazonS3>();
+builder.Services.AddAWSService<IAmazonCloudFront>();
 var app = builder.ConfigureLambdaApplication();
 
 app.MapPost("/motivator", async ([FromBody]Motivator motivator, IMediator mediator) =>
