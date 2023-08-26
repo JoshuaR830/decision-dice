@@ -122,6 +122,11 @@ Resources:
                   - "s3:DeleteObject"
                   - "s3:ListBucket"
                 Resource: "arn:aws:s3:::decision-dice-motivators/*"
+              - Sid: Cloudfront
+                Effect: Allow
+                Action:
+                  - "cloudfront:CreateInvalidation"
+                Resource: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/E33YSSGHUP7B9Q"
 
   UrlLambdaInvocationPermission:
     Type: AWS::Lambda::Permission

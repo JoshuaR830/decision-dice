@@ -9,13 +9,13 @@ public class CategoryFeedCommand : IRequest
 
     internal class Handler : IRequestHandler<CategoryFeedCommand>
     {
-        readonly IAmazonS3 _s3Client;
         readonly IMediator _mediator;
+        readonly IAWSHelper _awsHelper;
 
-        public Handler(IAmazonS3 s3Client, IMediator mediator)
+        public Handler(IAmazonS3 s3Client, IAmazonCloudFront cloudfrontClient, IMediator mediator, IAWSHelper awsHelper)
         {
-            _s3Client = s3Client;
             _mediator = mediator;
+            _awsHelper = awsHelper;
         }
 
         public async Task Handle(CategoryFeedCommand request, CancellationToken cancellationToken)
@@ -25,13 +25,9 @@ public class CategoryFeedCommand : IRequest
             if (!existingFeed.Categories.Any(name => name == request._category.CategoryName))
                 existingFeed.Categories.Add(request._category.CategoryName);
 
-            await _s3Client.PutObjectAsync(new PutObjectRequest
-            {
-                BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = $"feeds/category/{request._category.UserName}".ReplaceSpacesWithDashes(),
-                ContentType = "application/json",
-                ContentBody = existingFeed.Serialize()
-            });
+            var key = $"feeds/category/{request._category.UserName}";
+            await _awsHelper.PutObject(key, existingFeed);
+            await _awsHelper.InvalidateCache(key);
         }
     }
 }

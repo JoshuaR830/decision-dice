@@ -5,7 +5,6 @@ public static class StartupExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddMediatR(c => c.RegisterServicesFromAssembly(typeof(Program).Assembly));
-        //services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
@@ -41,6 +40,7 @@ public static class StartupExtensions
 
     public static WebApplication ConfigureLambdaApplication(this WebApplicationBuilder builder)
     {
+        builder.Services.AddSingleton<IAWSHelper, AWSHelper>();
         return SharedSetup(builder);
     }
 }
