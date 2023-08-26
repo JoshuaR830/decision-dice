@@ -20,7 +20,7 @@ public sealed class MotivatorFeedQuery: IRequest<MotivatorFeed>
         public async Task<MotivatorFeed> Handle(MotivatorFeedQuery request, CancellationToken cancellationToken)
         {
             MotivatorFeed responseObject;
-
+            Console.WriteLine("Motivator Feed Query");
             try
             {
                 var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
@@ -29,17 +29,21 @@ public sealed class MotivatorFeedQuery: IRequest<MotivatorFeed>
                     Key = $"feeds/motivators/{request._userName}/{request._categoryName}",
                 });
 
+                Console.WriteLine("S3 request made");
+
                 using var stream = feed.ResponseStream;
                 using var reader = new StreamReader(stream);
                 var response = await reader.ReadToEndAsync();
 
                 responseObject = response.Deserialize<MotivatorFeed>();
+                Console.WriteLine("Successfully serialized");
             }
             catch (Exception)
             {
                 responseObject = new MotivatorFeed(new List<Motivator>(), request._categoryName, request._userName);
             }
 
+            Console.WriteLine(responseObject.Serialize());
             return responseObject;
         }
     }
