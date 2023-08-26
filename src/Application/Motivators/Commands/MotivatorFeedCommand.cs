@@ -22,8 +22,8 @@ public class MotivatorFeedCommand : IRequest
         {
             var motivatorFeed = await _mediator.Send(new MotivatorFeedQuery(request._motivator.Category, request._motivator.UserName));
 
-            if(!motivatorFeed.MotivatorList.Any(title => title == request._motivator.Title))
-                motivatorFeed.MotivatorList.Add(request._motivator.Title);
+            if(!motivatorFeed.Motivators.Any(title => title == request._motivator.Title))
+                motivatorFeed.Motivators.Add(request._motivator.Title);
 
             await _s3Client.PutObjectAsync(new PutObjectRequest
             {
