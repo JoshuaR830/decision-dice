@@ -1,2 +1,2 @@
 ﻿namespace Application.Motivators.Models;
-public record CategoryFeed(IEnumerable<Category> Categories, string UserName);
+public record CategoryFeed(List<Category> Categories, string UserName);

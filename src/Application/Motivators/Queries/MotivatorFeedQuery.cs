@@ -37,7 +37,7 @@ public sealed class MotivatorFeedQuery: IRequest<MotivatorFeed>
             }
             catch (Exception)
             {
-                responseObject = new MotivatorFeed(Enumerable.Empty<Motivator>(), request._categoryName, request._userName);
+                responseObject = new MotivatorFeed(new List<Motivator>(), request._categoryName, request._userName);
             }
 
             return responseObject;
