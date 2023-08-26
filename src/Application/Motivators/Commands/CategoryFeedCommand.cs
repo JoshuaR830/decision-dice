@@ -25,9 +25,6 @@ public class CategoryFeedCommand : IRequest
             if (!existingFeed.Categories.Any(name => name == request._category.CategoryName))
                 existingFeed.Categories.Add(request._category.CategoryName);
 
-            Console.WriteLine(request._category);
-            Console.WriteLine(existingFeed.Serialize());
-
             await _s3Client.PutObjectAsync(new PutObjectRequest
             {
                 BucketName = IdentifierExtensions.BUCKET_NAME,

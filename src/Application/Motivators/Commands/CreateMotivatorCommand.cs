@@ -18,8 +18,6 @@ public class CreateMotivatorCommand : IRequest
             var key = request._motivator.GenerateIdentifier();
             var content = request._motivator.Serialize();
 
-            Console.WriteLine($"New motivator for {key}, called {content}");
-
             await _s3Client.PutObjectAsync(new PutObjectRequest
             {
                 BucketName = IdentifierExtensions.BUCKET_NAME,
