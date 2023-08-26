@@ -23,6 +23,9 @@ public class CategoryFeedCommand : IRequest
             var existingFeed = await _mediator.Send(new CategoryFeedQuery(request._category.UserName));
             existingFeed.Categories.ToList().Add(request._category);
 
+            Console.WriteLine(request._category);
+            Console.WriteLine(existingFeed.Serialize());
+
             await _s3Client.PutObjectAsync(new PutObjectRequest
             {
                 BucketName = IdentifierExtensions.BUCKET_NAME,
