@@ -29,6 +29,7 @@ public class AWSHelper : IAWSHelper
             DistributionId = "E33YSSGHUP7B9Q",
             InvalidationBatch = new InvalidationBatch
             {
+                CallerReference = DateTime.UtcNow.Ticks.ToString(),
                 Paths = new Paths
                 {
                     Items = new List<string> { $"/{key}" },
