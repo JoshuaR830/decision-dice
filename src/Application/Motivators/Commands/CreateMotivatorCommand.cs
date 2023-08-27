@@ -17,9 +17,7 @@ public class CreateMotivatorCommand : IRequest
         public async Task Handle(CreateMotivatorCommand request, CancellationToken cancellationToken)
         {
             var key = request._motivator.GenerateIdentifier();
-            var content = request._motivator.Serialize();
-
-            await _awsHelper.PutObject(key, content);
+            await _awsHelper.PutObject(key, request._motivator);
             await _awsHelper.InvalidateCache(key);
         }
     }

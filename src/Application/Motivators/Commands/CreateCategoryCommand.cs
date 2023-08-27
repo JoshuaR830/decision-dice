@@ -19,9 +19,7 @@ public class CreateCategoryCommand : IRequest
         public async Task Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var key = request._category.GenerateIdentifier();
-            var content = request._category.Serialize();
-
-            await _awsHelper.PutObject(key, content);
+            await _awsHelper.PutObject(key, request._category);
             await _awsHelper.InvalidateCache(key);
         }
     }
