@@ -23,7 +23,6 @@ public sealed class MotivatorQuery: IRequest<Motivator?>
         public async Task<Motivator?> Handle(MotivatorQuery request, CancellationToken cancellationToken)
         {
             var motivator = await _awsHelper.GetObject<Motivator>($"motivators/{request._userName}/{request._categoryName}/{request._title}");
-            Console.WriteLine(motivator.Serialize());
             if (motivator.IsError || motivator.Success == null)
                 return null;
             
