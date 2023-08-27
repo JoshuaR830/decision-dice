@@ -10,6 +10,7 @@ public sealed class MotivatorQuery: IRequest<Motivator?>
     {
         _userName = userName;
         _categoryName = categoryName;
+        _title = title;
     }
 
     internal sealed class Handler : IRequestHandler<MotivatorQuery, Motivator?>
