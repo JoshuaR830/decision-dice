@@ -1,0 +1,30 @@
+_id: req_841e26e170c3482ba3c47c308358eff6
+type: Request
+parentId: wrk_987e1d0f1d73426fb5d33ba468215b49
+modified: 1693140397957
+created: 1693139680685
+url: "{{ _.base_url }}/category"
+name: /category
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "categoryName": "{{ _.categoryName }}",
+      "userName": "{{ _.userName }}"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    disabled: false
+    value: application/json
+authentication: {}
+metaSortKey: -1693139680685
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,32 @@
+_id: req_e5240187f4a44d5b99974dace8566996
+type: Request
+parentId: wrk_987e1d0f1d73426fb5d33ba468215b49
+modified: 1693140389772
+created: 1693139680682
+url: "{{ _.base_url }}/motivator"
+name: /motivator
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "title": "{{ _.title }}",
+      "description": "string",
+      "category": "{{ _.categoryName }}",
+      "userName": "{{ _.userName }}"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    disabled: false
+    value: application/json
+authentication: {}
+metaSortKey: -1693139680682
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
