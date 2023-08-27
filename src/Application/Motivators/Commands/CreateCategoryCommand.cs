@@ -11,23 +11,18 @@ public class CreateCategoryCommand : IRequest
 
     internal class Handler : IRequestHandler<CreateCategoryCommand>
     {
-        IAmazonS3 _s3Client;
+        IAWSHelper _awsHelper;
 
-        public Handler(IAmazonS3 s3Client) =>
-            _s3Client = s3Client;
+        public Handler(IAWSHelper awsHelper) =>
+            _awsHelper = awsHelper;
 
         public async Task Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var key = request._category.GenerateIdentifier();
             var content = request._category.Serialize();
 
-            await _s3Client.PutObjectAsync(new PutObjectRequest
-            {
-                BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = key,
-                ContentType = "application/json",
-                ContentBody = content,
-            });
+            await _awsHelper.PutObject(key, content);
+            await _awsHelper.InvalidateCache(key);
         }
     }
 }

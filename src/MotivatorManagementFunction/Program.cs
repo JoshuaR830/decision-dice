@@ -45,4 +45,10 @@ app.MapGet("/motivator-feed/{userName}/{categoryName}", async (string userName, 
     return feed;
 });
 
+app.MapGet("/motivator/{userName}/{categoryName}/{title}", async (string userName, string categoryName, string title, IMediator mediator) =>
+{
+    var motivator = await mediator.Send(new MotivatorQuery(userName, categoryName, title));
+    return motivator;
+});
+
 app.Run();

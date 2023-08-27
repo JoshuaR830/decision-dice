@@ -11,38 +11,19 @@ public sealed class CategoryFeedQuery: IRequest<CategoryFeed>
 
     internal sealed class Handler : IRequestHandler<CategoryFeedQuery, CategoryFeed>
     {
-        public readonly IAmazonS3 _s3Client;
+        private readonly IAWSHelper _awsHelper;
 
-        public Handler(IAmazonS3 s3Client) => _s3Client = s3Client;
+        public Handler(IAWSHelper awsHelper) =>
+            _awsHelper = awsHelper;
 
         public async Task<CategoryFeed> Handle(CategoryFeedQuery request, CancellationToken cancellationToken)
         {
-            CategoryFeed responseObject;
+            var feed = await _awsHelper.GetObject<CategoryFeed>($"feeds/category/{request._userName}");
 
-            try
-            {
-                var feed = await _s3Client.GetObjectAsync(new GetObjectRequest
-                {
-                    BucketName = IdentifierExtensions.BUCKET_NAME,
-                    Key = $"feeds/category/{request._userName}".ReplaceSpacesWithDashes(),
-                });
+            if (feed.IsError || feed.Success == null)
+                return new CategoryFeed(new List<string>(), request._userName);
 
-                if (feed.HttpStatusCode != System.Net.HttpStatusCode.OK)
-                    return new CategoryFeed(new List<string>(), request._userName);
-
-                using var stream = feed.ResponseStream;
-                using var reader = new StreamReader(stream);
-                var response = await reader.ReadToEndAsync();
-
-            
-                responseObject = response.Deserialize<CategoryFeed>();
-            }
-            catch (Exception)
-            {
-                responseObject = new CategoryFeed(new List<string>(), request._userName);
-            }
-
-            return responseObject;
+            return feed.Success;
         }
     }
 }

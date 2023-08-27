@@ -1,12 +1,32 @@
 ﻿namespace Application.Queries;
 
-public sealed class MotivatorQuery: IRequest<Motivator>
+public sealed class MotivatorQuery: IRequest<Motivator?>
 {
-    internal sealed class Handler : IRequestHandler<MotivatorQuery, Motivator>
+    private string _userName;
+    private string _categoryName;
+    private string _title;
+
+    public MotivatorQuery(string userName, string categoryName, string title)
     {
-        public Task<Motivator> Handle(MotivatorQuery request, CancellationToken cancellationToken)
+        _userName = userName;
+        _categoryName = categoryName;
+    }
+
+    internal sealed class Handler : IRequestHandler<MotivatorQuery, Motivator?>
+    {
+        private readonly IAWSHelper _awsHelper;
+
+        public Handler(IAWSHelper awsHelper) =>
+            _awsHelper = awsHelper;
+
+        public async Task<Motivator?> Handle(MotivatorQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new Motivator(Guid.NewGuid(), "Title", "Description", "", ""));
+            var motivator = await _awsHelper.GetObject<Motivator>($"motivators/{request._userName}/{request._categoryName}/{request._title}");
+
+            if (motivator.IsError || motivator.Success == null)
+                return null;
+            
+            return motivator.Success;
         }
     }
 }

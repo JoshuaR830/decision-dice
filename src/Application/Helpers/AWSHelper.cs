@@ -22,6 +22,35 @@ public class AWSHelper : IAWSHelper
         });
     }
 
+    async Task<Result<T>> IAWSHelper.GetObject<T>(string key)
+    {
+        Result<T> responseObject;
+
+        try
+        {
+            var s3Response = await _s3Client.GetObjectAsync(new GetObjectRequest
+            {
+                BucketName = IdentifierExtensions.BUCKET_NAME,
+                Key = key.ReplaceSpacesWithDashes()
+            });
+
+            if (s3Response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+                return new Result<T>($"Request to S3 returned {s3Response.HttpStatusCode}");
+
+            using var stream = s3Response.ResponseStream;
+            using var reader = new StreamReader(stream);
+            var response = await reader.ReadToEndAsync();
+
+            responseObject = new Result<T>(response.Deserialize<T>());
+        }
+        catch (Exception e)
+        {
+            responseObject = new Result<T>(e.Message);
+        }
+
+        return responseObject;
+    }
+
     public async Task InvalidateCache(string key)
     {
         await _cloudFrontClient.CreateInvalidationAsync(new CreateInvalidationRequest

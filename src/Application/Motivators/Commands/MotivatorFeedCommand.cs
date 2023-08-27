@@ -9,13 +9,13 @@ public class MotivatorFeedCommand : IRequest
  
     internal class Handler : IRequestHandler<MotivatorFeedCommand>
     {
-        public readonly IAmazonS3 _s3Client;
+        public readonly IAWSHelper _awsHelper;
         public readonly IMediator _mediator;
 
-        public Handler(IAmazonS3 s3Client, IMediator mediator)
+        public Handler(IAWSHelper awsHelper, IMediator mediator)
         {
-            _s3Client = s3Client;
             _mediator = mediator;
+            _awsHelper = awsHelper;
         }
 
         public async Task Handle(MotivatorFeedCommand request, CancellationToken cancellationToken)
@@ -25,13 +25,9 @@ public class MotivatorFeedCommand : IRequest
             if(!motivatorFeed.Motivators.Any(title => title == request._motivator.Title))
                 motivatorFeed.Motivators.Add(request._motivator.Title);
 
-            await _s3Client.PutObjectAsync(new PutObjectRequest
-            {
-                BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = $"feeds/motivator/{request._motivator.UserName}/{request._motivator.Category}".ReplaceSpacesWithDashes(),
-                ContentType = "application/json",
-                ContentBody = motivatorFeed.Serialize()
-            });
+            var key = $"feeds/motivator/{request._motivator.UserName}/{request._motivator.Category}";
+            await _awsHelper.PutObject(key, motivatorFeed);
+            await _awsHelper.InvalidateCache(key);
         }
     }
 }

@@ -9,22 +9,18 @@ public class CreateMotivatorCommand : IRequest
 
     internal sealed class Handler : IRequestHandler<CreateMotivatorCommand>
     {
-        private readonly IAmazonS3 _s3Client;
+        private readonly IAWSHelper _awsHelper;
 
-        public Handler(IAmazonS3 srClient) => _s3Client = srClient;
+        public Handler(IAWSHelper awsHelper) =>
+            _awsHelper = awsHelper;
 
         public async Task Handle(CreateMotivatorCommand request, CancellationToken cancellationToken)
         {
             var key = request._motivator.GenerateIdentifier();
             var content = request._motivator.Serialize();
 
-            await _s3Client.PutObjectAsync(new PutObjectRequest
-            {
-                BucketName = IdentifierExtensions.BUCKET_NAME,
-                Key = key,
-                ContentType = "application/json",
-                ContentBody = content
-            }, cancellationToken);
+            await _awsHelper.PutObject(key, content);
+            await _awsHelper.InvalidateCache(key);
         }
     }
 }
