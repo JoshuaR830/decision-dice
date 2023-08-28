@@ -1,0 +1,22 @@
+_id: req_b243b2c70c7743e6a88f89d001b01e99
+type: Request
+parentId: wrk_a4c260a0052948398fe72791deb90eff
+modified: 1693205449067
+created: 1693205449067
+url: "{{ _.base_url }}/motivator/{{ _.userName }}/{{ _.categoryName }}/{{
+  _.title }}"
+name: /motivator/{userName}/{categoryName}/{title}
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1693205449067
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

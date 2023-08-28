@@ -1,0 +1,264 @@
+_id: spc_debb93bc7197432fa9b5f8c59cd79c55
+type: ApiSpec
+parentId: wrk_a4c260a0052948398fe72791deb90eff
+modified: 1693205444970
+created: 1693204853009
+fileName: New Document
+contents: |-
+  {
+    "openapi": "3.0.1",
+    "info": {
+      "title": "MotivatorManagementFunction",
+      "version": "1.0"
+    },
+    "paths": {
+      "/motivator": {
+        "post": {
+          "tags": [
+            "MotivatorManagementFunction"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motivator"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/category": {
+        "post": {
+          "tags": [
+            "MotivatorManagementFunction"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/category-feed/{userName}": {
+        "get": {
+          "tags": [
+            "MotivatorManagementFunction"
+          ],
+          "parameters": [
+            {
+              "name": "userName",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CategoryFeed"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/motivator-feed/{userName}/{categoryName}": {
+        "get": {
+          "tags": [
+            "MotivatorManagementFunction"
+          ],
+          "parameters": [
+            {
+              "name": "userName",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "categoryName",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/MotivatorFeed"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/motivator/{userName}/{categoryName}/{title}": {
+        "get": {
+          "tags": [
+            "MotivatorManagementFunction"
+          ],
+          "parameters": [
+            {
+              "name": "userName",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "categoryName",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "title",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Motivator"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Category": {
+          "type": "object",
+          "properties": {
+            "categoryName": {
+              "type": "string",
+              "nullable": true
+            },
+            "userName": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "CategoryFeed": {
+          "type": "object",
+          "properties": {
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            },
+            "userName": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "Motivator": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "nullable": true
+            },
+            "description": {
+              "type": "string",
+              "nullable": true
+            },
+            "category": {
+              "type": "string",
+              "nullable": true
+            },
+            "userName": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "MotivatorFeed": {
+          "type": "object",
+          "properties": {
+            "motivators": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            },
+            "category": {
+              "type": "string",
+              "nullable": true
+            },
+            "userName": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+contentType: yaml

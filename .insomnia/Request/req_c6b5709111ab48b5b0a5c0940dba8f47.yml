@@ -1,0 +1,21 @@
+_id: req_c6b5709111ab48b5b0a5c0940dba8f47
+type: Request
+parentId: wrk_a4c260a0052948398fe72791deb90eff
+modified: 1693205449065
+created: 1693205449065
+url: "{{ _.base_url }}/category-feed/{{ _.userName }}"
+name: /category-feed/{userName}
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1693205449065
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

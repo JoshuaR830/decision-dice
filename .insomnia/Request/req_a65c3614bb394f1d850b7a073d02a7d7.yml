@@ -1,0 +1,21 @@
+_id: req_a65c3614bb394f1d850b7a073d02a7d7
+type: Request
+parentId: wrk_a4c260a0052948398fe72791deb90eff
+modified: 1693205449066
+created: 1693205449066
+url: "{{ _.base_url }}/motivator-feed/{{ _.userName }}/{{ _.categoryName }}"
+name: /motivator-feed/{userName}/{categoryName}
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1693205449066
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
