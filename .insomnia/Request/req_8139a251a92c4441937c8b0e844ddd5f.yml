@@ -1,7 +1,7 @@
 _id: req_8139a251a92c4441937c8b0e844ddd5f
 type: Request
 parentId: wrk_a4c260a0052948398fe72791deb90eff
-modified: 1693205449058
+modified: 1693206537936
 created: 1693205449058
 url: "{{ _.base_url }}/motivator"
 name: /motivator
@@ -22,7 +22,7 @@ headers:
     disabled: false
     value: application/json
 authentication: {}
-metaSortKey: -1693139680682
+metaSortKey: -1693205449116
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
@@ -30,4 +30,3 @@ settingDisableRenderRequestBody: false
 settingEncodeUrl: true
 settingRebuildPath: true
 settingFollowRedirects: global
-
