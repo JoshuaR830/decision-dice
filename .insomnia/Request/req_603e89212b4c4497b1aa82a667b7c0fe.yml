@@ -11,8 +11,8 @@ body:
   mimeType: application/json
   text: |-
     {
-      "categoryName": "string",
-      "userName": "string"
+      "categoryName": "{{ _.categoryName }}",
+      "userName": "{{ _.userName }}"
     }
 parameters: []
 headers:
@@ -20,7 +20,7 @@ headers:
     disabled: false
     value: application/json
 authentication: {}
-metaSortKey: -1693205449166
+metaSortKey: -1693139680685
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
