@@ -4,8 +4,17 @@ parentId: env_f9690f539532ac56f5e1526caa8ece6a287bfd63
 modified: 1693205567083
 created: 1693205485782
 name: Lambda 2
-data: {}
-dataPropertyOrder: {}
-color: null
+data:
+  categoryName: Category
+  userName: Joshua
+  base_url: https://mp3qjihgouetn3yvxflhcma2eu0uuoai.lambda-url.eu-west-2.on.aws
+  title: title
+dataPropertyOrder:
+  "&":
+    - categoryName
+    - userName
+    - base_url
+    - title
+color: "#00ff1e"
 isPrivate: false
-metaSortKey: 1693205485782
+metaSortKey: 1693139680726
