@@ -11,10 +11,10 @@ body:
   mimeType: application/json
   text: |-
     {
-      "title": "string",
+      "title": "{{ _.title }}",
       "description": "string",
-      "category": "string",
-      "userName": "string"
+      "category": "{{ _.categoryName }}",
+      "userName": "{{ _.userName }}"
     }
 parameters: []
 headers:
@@ -22,7 +22,7 @@ headers:
     disabled: false
     value: application/json
 authentication: {}
-metaSortKey: -1693205449058
+metaSortKey: -1693139680682
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
@@ -30,3 +30,4 @@ settingDisableRenderRequestBody: false
 settingEncodeUrl: true
 settingRebuildPath: true
 settingFollowRedirects: global
+
