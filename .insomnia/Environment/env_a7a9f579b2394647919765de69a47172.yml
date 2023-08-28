@@ -1,9 +1,9 @@
 _id: env_a7a9f579b2394647919765de69a47172
 type: Environment
 parentId: env_f9690f539532ac56f5e1526caa8ece6a287bfd63
-modified: 1693205567083
+modified: 1693206976725
 created: 1693205485782
-name: Lambda 2
+name: Lambda
 data:
   categoryName: Category
   userName: Joshua
@@ -17,4 +17,4 @@ dataPropertyOrder:
     - title
 color: "#00ff1e"
 isPrivate: false
-metaSortKey: 1693139680726
+metaSortKey: 1693139680725

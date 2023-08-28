@@ -1,7 +1,7 @@
 _id: req_603e89212b4c4497b1aa82a667b7c0fe
 type: Request
 parentId: wrk_a4c260a0052948398fe72791deb90eff
-modified: 1693206536027
+modified: 1693206979348
 created: 1693205449064
 url: "{{ _.base_url }}/category"
 name: /category
@@ -20,7 +20,7 @@ headers:
     disabled: false
     value: application/json
 authentication: {}
-metaSortKey: -1693139680685
+metaSortKey: -1693205449091
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
