@@ -9,6 +9,15 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: decision-dice-motivators
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - '*'
+          - AllowedMethods:
+              - GET
+              - OPTIONS
+          - AllowedOrigins:
+              - "https://decisions.joshuarichardson.dev"
 
   MotivationBucketPolicy:
     Type: AWS::S3::BucketPolicy
