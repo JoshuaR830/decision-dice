@@ -15,7 +15,6 @@ Resources:
               - '*'
             AllowedMethods:
               - GET
-              - OPTIONS
             AllowedOrigins:
               - "https://decisions.joshuarichardson.dev"
 
