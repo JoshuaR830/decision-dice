@@ -13,10 +13,10 @@ Resources:
         CorsRules:
           - AllowedHeaders:
               - '*'
-          - AllowedMethods:
+            AllowedMethods:
               - GET
               - OPTIONS
-          - AllowedOrigins:
+            AllowedOrigins:
               - "https://decisions.joshuarichardson.dev"
 
   MotivationBucketPolicy:
