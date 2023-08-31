@@ -17,6 +17,7 @@ Resources:
               - GET
             AllowedOrigins:
               - "https://decisions.joshuarichardson.dev"
+              - "http://localhost:3000"
 
   MotivationBucketPolicy:
     Type: AWS::S3::BucketPolicy
