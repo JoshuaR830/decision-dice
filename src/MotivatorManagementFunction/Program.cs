@@ -5,11 +5,23 @@ using Amazon.CloudFront;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddDefaultAWSOptions(new AWSOptions());
 builder.Services.AddAWSService<IAmazonS3>();
 builder.Services.AddAWSService<IAmazonCloudFront>();
-var app = builder.ConfigureLambdaApplication();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapPost("/motivator", async ([FromBody]Motivator motivator, IMediator mediator) =>
 {

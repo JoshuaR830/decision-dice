@@ -9,8 +9,6 @@ public class AWSHelper : IAWSHelper
         _s3Client = s3Client;
         _cloudFrontClient = cloudFrontClient;
     }
-
-
     public async Task PutObject(string key, object content)
     {
         await _s3Client.PutObjectAsync(new PutObjectRequest
