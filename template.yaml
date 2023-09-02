@@ -18,6 +18,8 @@ Resources:
             AllowedOrigins:
               - "https://decisions.joshuarichardson.dev"
               - "http://localhost:3000"
+      WebsiteConfiguration:
+        IndexDocument: index.html
 
   MotivationBucketPolicy:
     Type: AWS::S3::BucketPolicy
