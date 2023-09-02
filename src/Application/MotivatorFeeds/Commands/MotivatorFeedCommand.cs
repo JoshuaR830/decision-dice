@@ -1,4 +1,4 @@
-﻿namespace Application.Motivators.Commands;
+﻿namespace Application.MotivatorFeeds.Commands;
 
 public class MotivatorFeedCommand : IRequest
 {
@@ -6,7 +6,7 @@ public class MotivatorFeedCommand : IRequest
 
     public MotivatorFeedCommand(Motivator motivator) =>
         _motivator = motivator;
- 
+
     internal class Handler : IRequestHandler<MotivatorFeedCommand>
     {
         public readonly IAWSHelper _awsHelper;
@@ -22,7 +22,7 @@ public class MotivatorFeedCommand : IRequest
         {
             var motivatorFeed = await _mediator.Send(new MotivatorFeedQuery(request._motivator.Category, request._motivator.UserName));
 
-            if(!motivatorFeed.Motivators.Any(title => title == request._motivator.Title))
+            if (!motivatorFeed.Motivators.Any(title => title == request._motivator.Title))
                 motivatorFeed.Motivators.Add(request._motivator.Title);
 
             var key = $"feeds/motivator/{request._motivator.UserName}/{request._motivator.Category}";

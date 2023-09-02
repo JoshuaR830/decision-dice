@@ -1,6 +1,6 @@
-﻿namespace Application.Queries;
+﻿namespace Application.MotivatorFeeds.Queries;
 
-public sealed class MotivatorFeedQuery: IRequest<MotivatorFeed>
+public sealed class MotivatorFeedQuery : IRequest<MotivatorFeed>
 {
     public string _categoryName;
     public string _userName;

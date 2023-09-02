@@ -2,6 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Amazon.S3;
 using Amazon.Extensions.NETCore.Setup;
 using Amazon.CloudFront;
+using Application.Categories.Models;
+using Application.MotivatorFeeds.Commands;
+using Application.Categories.Commands;
+using Application.CategoryFeeds.Commands;
+using Application.CategoryFeeds.Queries;
+using Application.MotivatorFeeds.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();

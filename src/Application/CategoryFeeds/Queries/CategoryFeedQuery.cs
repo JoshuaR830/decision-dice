@@ -1,6 +1,6 @@
-﻿namespace Application.Queries;
+﻿namespace Application.CategoryFeeds.Queries;
 
-public sealed class CategoryFeedQuery: IRequest<CategoryFeed>
+public sealed class CategoryFeedQuery : IRequest<CategoryFeed>
 {
     public string _userName;
 

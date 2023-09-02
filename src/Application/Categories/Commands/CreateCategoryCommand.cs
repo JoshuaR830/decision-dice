@@ -1,4 +1,4 @@
-﻿namespace Application.Motivators.Commands;
+﻿namespace Application.Categories.Commands;
 
 public class CreateCategoryCommand : IRequest
 {

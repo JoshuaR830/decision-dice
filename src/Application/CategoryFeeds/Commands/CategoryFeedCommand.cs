@@ -1,4 +1,4 @@
-﻿namespace Application.Motivators.Commands;
+﻿namespace Application.CategoryFeeds.Commands;
 
 public class CategoryFeedCommand : IRequest
 {

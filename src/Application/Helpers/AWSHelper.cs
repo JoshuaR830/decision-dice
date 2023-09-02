@@ -1,4 +1,5 @@
 ﻿namespace Application.Helpers;
+
 public class AWSHelper : IAWSHelper
 {
     IAmazonS3 _s3Client;
