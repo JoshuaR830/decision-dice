@@ -89,7 +89,7 @@ Resources:
           CachePolicyId: !Ref MotivationCachePolicy
         Enabled: true
         Origins:
-          - Id: DecisionAPI
+          - Id: DecisionApi
             DomainName: decision-dice-motivators.s3.eu-west-2.amazonaws.com
             S3OriginConfig:
               OriginAccessIdentity: ""
