@@ -72,6 +72,7 @@ Resources:
             S3OriginConfig:
               OriginAccessIdentity: ""
             OriginAccessControlId: !Ref MotivationOriginAccessControl
+            OriginPath: /index.html
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:266804135388:certificate/126b7b2b-ea99-40af-98a2-03ab69944526
           MinimumProtocolVersion: TLSv1.2_2018
@@ -94,7 +95,6 @@ Resources:
             S3OriginConfig:
               OriginAccessIdentity: ""
             OriginAccessControlId: !Ref DecisionsApiOriginAccessControl
-            OriginPath: index.html
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:266804135388:certificate/17a8bb50-7f70-4cc7-9f4f-39fcd8ddce1a
           MinimumProtocolVersion: TLSv1.2_2018
