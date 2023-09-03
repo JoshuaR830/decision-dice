@@ -26,18 +26,27 @@ Resources:
       PolicyDocument:
         Version: 2012-10-17
         Statement:
-          Sid: AllowCloudFrontServicePrincipalReadOnly
-          Effect: Allow
-          Principal:
+          - Sid: AllowCloudFrontServicePrincipalReadOnly
+            Effect: Allow
+            Principal:
             Service: cloudfront.amazonaws.com
-          Action:
+            Action:
             - s3:GetObject
-          Resource:
-            - "arn:aws:s3:::decision-dice-motivators/*"
-          Condition:
-            StringEquals:
-              AWS:SourceArn: 
+            Resource: "arn:aws:s3:::decision-dice-motivators/*"
+            Condition:
+              StringEquals:
+                AWS:SourceArn: 
                 - !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${MotivationDistribution}"
+          - Sid: AllowCloudFrontApiPrincipal
+            Effect: Allow
+            Principal:
+            Service: cloudfront.amazonaws.com
+            Action:
+              - s3:GetObject
+            Resource: "arn:aws:s3:::decision-dice-motivators/*"
+            Condition:
+              StringEquals:
+                AWS:SourceArn: 
                 - !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${DecisionApiDistribution}"
 
   MotivationOriginAccessControl:
