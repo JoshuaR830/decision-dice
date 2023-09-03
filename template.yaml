@@ -18,8 +18,6 @@ Resources:
             AllowedOrigins:
               - "https://decisions.joshuarichardson.dev"
               - "http://localhost:3000"
-      WebsiteConfiguration:
-        IndexDocument: index.html
 
   MotivationBucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -47,6 +45,15 @@ Resources:
         OriginAccessControlOriginType: s3
         SigningBehavior: always
         SigningProtocol: sigv4
+
+  DecisionsApiOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl  
+    Properties:
+      OriginAccessControlConfig:
+        Name: DecisionsApiOac
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
       
   MotivationDistribution:
     Type: AWS::CloudFront::Distribution  
@@ -67,6 +74,29 @@ Resources:
             OriginAccessControlId: !Ref MotivationOriginAccessControl
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:266804135388:certificate/126b7b2b-ea99-40af-98a2-03ab69944526
+          MinimumProtocolVersion: TLSv1.2_2018
+          SslSupportMethod: sni-only
+
+  DecisionApiDistribution:
+    Type: AWS::CloudFront::Distribution  
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - decisions-api.joshuarichardson.dev
+        DefaultCacheBehavior:
+          TargetOriginId: DecisionApi
+          ViewerProtocolPolicy: allow-all
+          CachePolicyId: !Ref MotivationCachePolicy
+        Enabled: true
+        Origins:
+          - Id: DecisionAPI
+            DomainName: decision-dice-motivators.s3.eu-west-2.amazonaws.com
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+            OriginAccessControlId: !Ref DecisionsApiOriginAccessControl
+            OriginPath: index.html
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:266804135388:certificate/17a8bb50-7f70-4cc7-9f4f-39fcd8ddce1a
           MinimumProtocolVersion: TLSv1.2_2018
           SslSupportMethod: sni-only
 
