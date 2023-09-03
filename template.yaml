@@ -179,7 +179,7 @@ Resources:
                 Effect: Allow
                 Action:
                   - "cloudfront:CreateInvalidation"
-                Resource: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/E33YSSGHUP7B9Q"
+                Resource: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/EYHNJPUS11GDF"
 
   UrlLambdaInvocationPermission:
     Type: AWS::Lambda::Permission
