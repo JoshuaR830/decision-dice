@@ -54,7 +54,7 @@ public class AWSHelper : IAWSHelper
     {
         await _cloudFrontClient.CreateInvalidationAsync(new CreateInvalidationRequest
         {
-            DistributionId = "E33YSSGHUP7B9Q",
+            DistributionId = "EYHNJPUS11GDF",
             InvalidationBatch = new InvalidationBatch
             {
                 CallerReference = DateTime.UtcNow.Ticks.ToString(),
