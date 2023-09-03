@@ -113,7 +113,9 @@ Resources:
             CookieBehavior: none
           EnableAcceptEncodingGzip: true
           HeadersConfig:
-            HeaderBehavior: none
+            HeaderBehavior: whitelist
+            Headers:
+              - Origin
           QueryStringsConfig:
             QueryStringBehavior: none
 
