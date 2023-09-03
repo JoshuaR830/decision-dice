@@ -29,25 +29,23 @@ Resources:
           - Sid: AllowCloudFrontServicePrincipalReadOnly
             Effect: Allow
             Principal:
-            Service: cloudfront.amazonaws.com
+              Service: cloudfront.amazonaws.com
             Action:
             - s3:GetObject
             Resource: "arn:aws:s3:::decision-dice-motivators/*"
             Condition:
               StringEquals:
-                AWS:SourceArn: 
-                - !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${MotivationDistribution}"
+                AWS:SourceArn: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${MotivationDistribution}"
           - Sid: AllowCloudFrontApiPrincipal
             Effect: Allow
             Principal:
-            Service: cloudfront.amazonaws.com
+              Service: cloudfront.amazonaws.com
             Action:
               - s3:GetObject
             Resource: "arn:aws:s3:::decision-dice-motivators/*"
             Condition:
               StringEquals:
-                AWS:SourceArn: 
-                - !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${DecisionApiDistribution}"
+                AWS:SourceArn: !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${DecisionApiDistribution}"
 
   MotivationOriginAccessControl:
     Type: AWS::CloudFront::OriginAccessControl  
