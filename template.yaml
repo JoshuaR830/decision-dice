@@ -18,6 +18,8 @@ Resources:
             AllowedOrigins:
               - "https://decisions.joshuarichardson.dev"
               - "http://localhost:3000"
+      # WebsiteConfiguration:
+      #   IndexDocument: index.html
 
   MotivationBucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -82,11 +84,11 @@ Resources:
             S3OriginConfig:
               OriginAccessIdentity: ""
             OriginAccessControlId: !Ref MotivationOriginAccessControl
-            OriginPath: /index.html
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:266804135388:certificate/126b7b2b-ea99-40af-98a2-03ab69944526
           MinimumProtocolVersion: TLSv1.2_2018
           SslSupportMethod: sni-only
+        DefaultRootObject: index.html
 
   DecisionApiDistribution:
     Type: AWS::CloudFront::Distribution  
